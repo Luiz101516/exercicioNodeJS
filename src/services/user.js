@@ -44,9 +44,28 @@ export const updateUser = async (id, params) => {
     return user
 }
 
-export const validateUser = async (params) => {
-    return (
-        params.email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-        && params.cpf.match(/^(([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2}))$/)
-    );
+export const validateUser = (params) => {
+    if (!params.email || !params.cpf) {
+        return false;
+    }
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const isEmailValid = params.email.toLowerCase().match(emailRegex) !== null;
+
+    const cpfRegex = /^(([0-9]{3}\.){2}[0-9]{3}-[0-9]{2}|[0-9]{11})$/;
+    const isCpfValid = params.cpf.match(cpfRegex) !== null;
+
+    return isEmailValid && isCpfValid;
+}
+
+export const extractUserParams = (body) => {
+    return {
+        name: body.name,
+        email: body.email,
+        age: body.age,
+        gender: body.gender,
+        phone: body.phone,
+        cpf: body.cpf,
+        rg: body.rg
+    };
 }

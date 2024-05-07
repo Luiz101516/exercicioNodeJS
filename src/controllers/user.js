@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getUsers, getUser, createUser, deleteUser, updateUser, validateUser } from '../services/user.js'
+import { getUsers, getUser, createUser, deleteUser, updateUser, validateUser, extractUserParams } from '../services/user.js'
 
 const router = Router()
 
@@ -14,7 +14,8 @@ router.get("/:id", async (request, response) => {
 })
 
 router.post("/", async (request, response) => {
-    if (validateUser(request.body)) {
+    const params = extractUserParams(request.body);
+    if (validateUser(params)) {
         const params = {
             name: request.body.name,
             email: request.body.email,
@@ -26,6 +27,8 @@ router.post("/", async (request, response) => {
         }
         const user = await createUser(params)
         return response.status(201).send(user)
+    } else {
+        return response.status(400).send("Valores inválidos");
     }
 })
 
@@ -36,8 +39,9 @@ router.delete("/:id", async (request, response) => {
 })
 
 router.put("/:id", async (request, response) => {
+    const params = extractUserParams(request.body);
+    if (validateUser(params)) {
 
-    if (validateUser(request.body)) {
         const user = await updateUser(request.params.id, {
             name: request.body.name,
             email: request.body.email,
@@ -49,6 +53,8 @@ router.put("/:id", async (request, response) => {
         })
 
         return response.status(200).send(user)
+    } else {
+        return response.status(400).send("Valores inválidos");
     }
 })
 

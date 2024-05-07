@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const URI = 'mongodb+srv://101516:GlHBenThEaqDWH6X@cluster0.hlmchud.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const URI = 'mongodb+srv://101086:iuON6Om4tbl8rtxO@cluster0.vr4ufas.mongodb.net/'
 
 const databaseConnection = async () => {
     if (!global.mongoose) {
