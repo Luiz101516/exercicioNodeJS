@@ -19,7 +19,7 @@ Não funciona, éoq, show de bola
 
 ## Instalar projeto
 
-Para instalar o projeto, basta dar um git clone https://github.com/Luiz101516/exercicioNodeJS.git no console, ou, realizar a instalação diretamente pelo github, indo em Code > Download ZIP e extraindo os arquivos da pasta.zip
+Para instalar o projeto, basta utilizar  ``` git clone https://github.com/Luiz101516/exercicioNodeJS.git ```  no console, ou, realizar a instalação diretamente pelo github, indo em Code > Download ZIP e extraindo os arquivos da pasta.zip
 
 ## Instalar dependencias
 
